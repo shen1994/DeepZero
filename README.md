@@ -1,5 +1,5 @@
 # DeepZero
-django+python3环境下开发的web接口
+django2.0.2 + python3环境下开发的web接口
 
 ## 1. 效果展示  
 ![image](https://github.com/shen1994/README_FILE/raw/master/images/menu.jpg)
