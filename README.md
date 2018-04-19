@@ -2,10 +2,7 @@
 django2.0.2 + python3环境下开发的web接口
 
 ## 1. 效果展示  
-![image](https://github.com/shen1994/README_FILE/raw/master/images/menu.jpg)
-![image](https://github.com/shen1994/README_FILE/raw/master/images/blog_submit.jpg)
-![image](https://github.com/shen1994/README_FILE/raw/master/images/image_retrieval.jpg)
-![image](https://github.com/shen1994/README_FILE/raw/master/images/text_chat.jpg)
+
 
 ## 2.model载入数据库,并且保证localhost:8000/home/menu/运行一次  
 `cd DeepZero-master`  
