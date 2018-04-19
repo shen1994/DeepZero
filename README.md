@@ -18,4 +18,4 @@ django+python3环境下开发的web接口
 `python manage.py runserver 0.0.0.0:8000`  
 
 3.创建超级用户，用于发布信息  
-
+`python manage.py createsuperuser`
