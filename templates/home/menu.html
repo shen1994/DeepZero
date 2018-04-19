@@ -1,0 +1,69 @@
+﻿{% extends "home/base.html" %}
+{% load staticfiles %}
+
+{% block title %}人工智能开放平台{% endblock %}
+{% block css_link %}
+    <link rel="stylesheet" href="{% static 'css/home_base.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xs-7 col-md-7">
+        <div class="news">
+            <h3><a href="{% url 'home:menu_service_title' %}"><font color="0x0000ff">特色服务 >></font></a></h3>
+            <ul>
+                <table class="table table-hover">
+                    {% for service in services %}
+                    <tr>
+                        <td>
+                            <li><a href="service/{{ service.id }}"><font size="3" color="0x000000">{{ service.title|slice:'12' }}</font></a></li>
+                        </td>
+                        <td>
+                            <font size="2" color="0x000000">{{ service.created|date:"Y-m-d" }}</font>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </ul>
+        </div>
+
+        <div class="news">
+            <h3><a href="{% url 'home:menu_application_title' %}"><font color="0x0000ff">智能产品 >></font></a></h3>
+            <ul>
+                <table class="table table-hover">
+                    {% for application in applications %}
+                    <tr>
+                        <td>
+                            <li><a href="application/{{ application.id }}"><font size="3" color="0x000000">{{ application.title|slice:'12' }}</font></a></li>
+                        </td>
+                        <td>
+                            <font size="2" color="0x000000">{{ application.created|date:"Y-m-d" }}</font>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>              
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-xs-5 col-md-5">
+        <div class="news">
+            <h3><a href="{% url 'home:menu_message_title' %}"><font color="0x0000ff">最新动态 >></font></a></h3>
+            <ul>
+                <table class="table table-hover">
+                    {% for message in messages %}
+                    <tr>
+                        <td>
+                            <li><a href="message/{{ message.id }}"><font size="3" color="0x000000">{{ message.title|slice:'12' }}</font></a></li>
+                        </td>
+                        <td>
+                            <font size="2" color="0x000000">{{ message.created|date:"Y-m-d" }}</font>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </ul>
+        </div>
+    </div>  
+</div>
+{% endblock %}

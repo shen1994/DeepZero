@@ -1,0 +1,25 @@
+﻿{% load staticfiles %}
+
+<style type="text/css">
+    .top_image{
+        margin-top: 20px;
+        text-align: center;
+    }
+    .bottom_image{
+        margin-top: 50px;
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    <div class="top_image">
+        {%for image in images_top %}
+            <img src="{% static image %}" width="226px">
+        {% endfor %}
+    </div>
+    <div class="bottom_image">
+        {%for image in images_bottom %}
+            <img src="{% static image %}" width="226px">
+        {% endfor %}
+    </div>
+</div>

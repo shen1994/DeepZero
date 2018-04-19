@@ -1,0 +1,49 @@
+﻿{% extends "home/base.html" %}
+{% load staticfiles %}
+
+{% block title %}{{ message_content.title }}{% endblock %}
+
+{% block css_link %}
+    <link rel="stylesheet" href="{% static 'css/home_base.css' %}" />
+{% endblock %}
+
+{% block content %}
+<!--start_print-->
+<div class="content">
+    <h1 class="text-center">{{ message_content.title }}</h1>
+    <p class="text-center">
+        <span>编辑:{{ message_content.author.username }}</span>
+        <span style="margin-left:30px">发布时间:{{ message_content.created|date:"Y-m-d" }}</span>
+    </p>
+    <p class="text-left">
+        {{ message_content.body }}
+    </p>
+</div>
+<!--end_print-->
+<div class="button_group">
+    <p class="text-right">
+        <button id="print_content" onclick="print_content()" class="btn btn-primary">打印</button>
+        <button id="go_back" onclick="go_back()" class="btn btn-primary" style="margin-left:10px">返回</button>
+    </p>
+</div>
+{% endblock %}
+
+{% block javascritp %}
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
+<script type="text/javascript">
+    function print_content(){
+        body_html = window.document.body.innerHTML;
+        start_str = "<!--start_print-->";
+        end_str = "<!--end_print-->";
+        print_html = body_html.substring(body_html.indexOf(start_str) + 18);
+        print_html = print_html.substring(0, print_html.indexOf(end_str));
+        window.document.body.innerHTML = print_html;
+        window.print();
+        window.document.body.innerHTML = body_html;
+    }
+    function go_back() {
+        window.location.href = "{% url 'home:menu_message_title' %}";
+    }
+</script>
+{% endblock %}

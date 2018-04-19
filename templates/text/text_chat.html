@@ -1,0 +1,58 @@
+﻿{% load staticfiles %}
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>智能问答</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/text_chat_style.css' %}" media="screen" type="text/css" />
+</head>
+<body>
+    <div class="row text-center verticle-middle-sm">
+        <h1>智能问答</h1>
+    </div>
+    <div class="row" style="margin-top:50px">
+        <div class="col-md-2">
+            {% include 'text/text_slider.html' %}
+        </div>
+        <div class="col-md-10 container">
+            <div id="convo">
+                <ul class="chat-thread">
+                    {% for sentence in sentences %}
+                        <li role="me">{{ sentence.question }}</li>
+                        <li role="you">{{ sentence.answer }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="row text-center verticle-middle-sm">  
+                <input class="sent_input" id="sentinput"/>  
+                <button id="question_submit" class="sent_btn" name="question_submit">发送</button>  
+            </div> 
+
+        </div>
+    </div>
+
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/csrf.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
+<script type="text/javascript">
+    $('#question_submit').on('click', function (){
+        var question = $("#sentinput").val();
+        $.ajax({
+            url: "{% url 'deep_text:text_chat' %}",
+            type: "POST",
+            data: { "question": question },
+            success: function(e){
+                if(e == "1"){
+                    location.href = "{% url 'deep_text:text_chat' %}";
+                }else{
+                    layer.msg("发布内容不能为空");
+                }
+            },
+        });
+    });
+</script>
+</body>
+</html>

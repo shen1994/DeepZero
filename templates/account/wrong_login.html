@@ -1,0 +1,30 @@
+﻿{% load staticfiles %}
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>账号或密码错误</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+</head>
+<body>
+    <div class="row text-center vertical-middle-sm" style="margin-top:200px">
+        <p class="text-center">
+            <font size="5">
+                账号或密码错误,请返回重新登录!
+            </font>
+        </p>
+        <p class="text-center">
+            <button id="go_back" onclick="go_back()" class="btn btn-primary" style="margin-left:10px">返回</button>
+        </p>
+    </div>
+</body>
+
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
+<script type="text/javascript">
+    function go_back() {
+        window.location.href = "{% url 'account:user_login' %}";
+    }
+</script>
+</html>

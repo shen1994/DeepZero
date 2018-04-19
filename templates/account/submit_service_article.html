@@ -1,0 +1,101 @@
+﻿{% load staticfiles %}
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>发布文章</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" href="{% static 'editor/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'editor/css/editormd.css' %}" />
+</head>
+<body>
+
+    <div style="margin-left:10px">
+    <form class="form-horizontal" action="." method="post">
+        {% csrf_token %}
+        <div class="row" style="margin-top:10px">
+            <div class="col-md-2 text-right"><span>专栏:</span></div>
+            <div class="col-md-10 text-left">
+                <select id="which_column" onchange="change_column()">
+                    <option value="1">特色服务</option>
+                    <option value="2">智能产品</option>
+                    <option value="3">最新动态</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:10px">
+            <div class="col-md-2 text-right"><span>标题:</span></div>
+            <div class="col-md-10 text-left">
+                {{ menu_services.title }}
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:10px">
+            <div class="col-md-2 text-right"><span>内容:</span></div>
+            <div id="editormd" class="col-md-10 text-left">
+                <textarea style="display:none" id="id_body"></textarea>
+            </div>
+        </div>
+
+        <p class="text-right" style="margin-right:320px">
+            <input type="button" class="btn btn-primary btn-lg" value="发布" onclick="submit_article()" />
+        </p>
+    </form>
+</div>
+
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
+<script type="text/javascript" src="{% static 'editor/editormd.min.js' %}"></script>
+<script type="text/javascript">
+    function change_column() {
+        var e = $("#which_column").val();
+        switch (e) {
+            case "1":
+                window.location.href = "{% url 'account:service_post' %}";
+                break;
+            case "2":
+                window.location.href = "{% url 'account:application_post' %}";
+                break;
+            case "3":
+                window.location.href = "{% url 'account:message_post' %}";
+                break;
+            default:
+                break;
+        }
+    }
+    function submit_article(){
+        var title = $("#id_title").val();
+        var body = $("#id_body").val();
+        $.ajax({
+            url: "{% url 'account:service_post' %}",
+            type: "POST",
+            data: {"title":title, "body":body},
+            success: function(e){
+                if(e == "0"){
+                    layer.msg("successful");
+                    location.href = "{% url 'home:menu_process' %}";
+                }else if(e == "1"){
+                    layer.msg("sorry");
+                }else{
+                    layer.msg("发布内容不能为空");
+                }
+            },
+        });
+    }
+    $(function () {
+        var editor = editormd("editormd", {
+            width: "60%",
+            height: 600,
+            syncScrolling: "single",
+            path: "{% static 'editor/lib/' %}",
+        });
+    });
+</script>
+
+</body>
+</html>
+
+
+

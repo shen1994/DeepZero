@@ -1,0 +1,44 @@
+﻿{% extends "home/base.html" %}
+{% load staticfiles %}
+
+{% block title %}智能产品标题列表{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2 class="text-center">智能产品</h2>
+    </div>
+    <div class="col-md-4">
+        <img width="60px" src="{% static 'images/application_logo.jpg' %}" />
+    </div>
+</div>
+<div class="contaner">
+    <div class="col-md-8">
+        {% for application_title in application_titles %}
+        <div class="list-group">
+            <a href="{{ application_title.id }}" class="list-group-item">
+                <span>题目:{{ application_title.title|slice:'30' }}</span>
+                <span style="margin-left:20px">{{ application_title.created|date:"Y-m-d" }}</span>
+            </a>
+        </div>
+        {% endfor %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if page.has_previous %}
+                <a href="?page={{ page.previous_page_number }}">Previous</a>
+                {% endif %}
+                <span class="current">
+                    Page {{ page.number }} of {{ page.paginator.num_pages }}
+                </span>
+                {% if page.has_next %}
+                <a href="?page={{ page.next_page_number }}">Next</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+     <div class="col-md-4">
+        <h4>最受欢迎的文章</h4>
+    </div>
+</div>
+
+{% endblock %}
