@@ -8,7 +8,7 @@ django2.0.2 + python3环境下开发的web接口
 ![image](https://github.com/shen1994/README/raw/master/images/text_chat.jpg)  
 
 ## 1. 工具需求  
-* django私人下载地址  
+* django2.0.2私人下载地址  
   链接: <https://pan.baidu.com/s/1RmWWv4Yf-EP9mif46ZlqmQ>  密码: 603t  
 
 ## 2.model载入数据库,并且保证localhost:8000/home/menu/运行一次  
